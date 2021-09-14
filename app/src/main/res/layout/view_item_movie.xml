@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/movieCard"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/padding_standard_root_layout">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/posterView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.8"
+        android:layout_marginBottom="@dimen/padding_standard_root_layout"
+        android:scaleType="center"
+        app:elevation="@dimen/card_elevation" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/titleView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:ellipsize="middle"
+        android:fontFamily="sans-serif-black"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/margin_standard"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:singleLine="true" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/releaseDateView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.1"
+        android:fontFamily="sans-serif-light"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="16sp" />
+
+</LinearLayout>

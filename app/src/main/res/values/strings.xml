@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">MvvmCleanAnilShatharashi</string>
+    <string name="no_internet_message">"Please check your Internet connection"</string>
+    <string name="error_message">Error in Fetching the Movies</string>
+    <string name="unknown_error_message">Unknown Error</string>
+    <string name="label_overview">Overview:</string>
+    <string name="title_movies_fragment">Movies</string>
+    <string name="detail_release_date">Released on : %1s</string>
+    <string name="user_rating_label">User Rating : </string>
+</resources>

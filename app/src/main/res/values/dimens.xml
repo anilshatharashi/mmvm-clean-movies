@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="padding_standard_root_layout">8dp</dimen>
+    <dimen name="padding_standard">8dp</dimen>
+    <dimen name="margin_standard">8dp</dimen>
+    <dimen name="margin_32">32dp</dimen>
+    <dimen name="padding_tiny">4dp</dimen>
+    <dimen name="headline_text_view">24sp</dimen>
+
+
+    <dimen name="poster_view_margin_bottom">20dp</dimen>
+    <dimen name="card_elevation">8dp</dimen>
+    <dimen name="card_cornor_radius">8dp</dimen>
+    <dimen name="movie_title_size">18sp</dimen>
+    <dimen name="movie_release_date_size">16sp</dimen>
+</resources>
