@@ -80,7 +80,7 @@ class MoviesFragment : BaseFragment() {
         }
     }
 
-    fun showLoadingView() {
+    private fun showLoadingView() {
         binding.run {
             progressBar.visibility = View.VISIBLE
             moviesListRecyclerView.visibility = View.GONE
@@ -112,7 +112,7 @@ class MoviesFragment : BaseFragment() {
         emptyStateView.visibility = View.GONE
     }
 
-    fun hideLoadingView() {
+    private fun hideLoadingView() {
         binding.run {
             progressBar.visibility = View.GONE
             moviesListRecyclerView.visibility = View.VISIBLE

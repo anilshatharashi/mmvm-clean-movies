@@ -6,13 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.mvvmclean.anilshatharashi.MoviesActivity
 import com.example.mvvmclean.anilshatharashi.R
+import com.example.mvvmclean.anilshatharashi.databinding.FragmentMovieDetailBinding
 import com.example.mvvmclean.anilshatharashi.presentation.model.UiMovie
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.android.synthetic.main.fragment_movie_detail.view.*
 
 @AndroidEntryPoint
 class MovieDetailFragment : BaseFragment() {
 
+    private var _binding: FragmentMovieDetailBinding? = null
+    private val binding get() = _binding!!
     private var movie: UiMovie? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,16 +28,16 @@ class MovieDetailFragment : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
-        savedInstanceState: Bundle?
+        savedInstanceState: Bundle?,
     ): View {
-        val rootView: View = inflater.inflate(R.layout.fragment_movie_detail, container, false)
-        movie?.let { renderDataOnUi(rootView, it) }
-        return rootView
+        _binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        movie?.let { renderDataOnUi(it) }
+        return binding.root
     }
 
-    private fun renderDataOnUi(rootView: View?, model: UiMovie) {
+    private fun renderDataOnUi(model: UiMovie) {
         updateToolbar(model.title)
-        rootView?.run {
+        binding.run {
             detailImageView.loadFromUrl(backdropSize + model.backdropPath)
             detailTitleView.text = model.title
             detailReleasedOnView.text = getString(R.string.detail_release_date, model.releaseDate)
@@ -57,7 +59,7 @@ class MovieDetailFragment : BaseFragment() {
     }
 
     companion object {
-         const val FRAGMENT_TAG = "movie_details_frag"
+        const val FRAGMENT_TAG = "movie_details_frag"
         private const val SELECTED_MOVIE_KEY = "selected_movie"
         fun newInstance(movie: UiMovie): MovieDetailFragment =
             MovieDetailFragment().apply {
@@ -70,7 +72,7 @@ class MovieDetailFragment : BaseFragment() {
     }
 
     override fun onContentError() {
-       // showNoInternetMessage()
+        // showNoInternetMessage()
     }
 
     override fun onContentAvailable() {
