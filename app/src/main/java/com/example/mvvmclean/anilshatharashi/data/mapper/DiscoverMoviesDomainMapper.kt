@@ -6,10 +6,9 @@ import com.example.mvvmclean.anilshatharashi.domain.DiscoverMovies
 import com.example.mvvmclean.anilshatharashi.domain.Movie
 import com.example.mvvmclean.anilshatharashi.domain.OriginalLanguage
 import com.example.mvvmclean.anilshatharashi.domain.mapper.Mapper
-import com.example.mvvmclean.anilshatharashi.presentation.mapper.DateFormatter
 import javax.inject.Inject
 
-class DiscoverMoviesDomainMapper @Inject constructor(private val dateFormatter: DateFormatter)
+class DiscoverMoviesDomainMapper @Inject constructor()
     : Mapper<DiscoverMoviesResponse, DiscoverMovies> {
     override fun mapFrom(from: DiscoverMoviesResponse): DiscoverMovies =
         DiscoverMovies(

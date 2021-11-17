@@ -13,4 +13,6 @@
     <dimen name="card_cornor_radius">8dp</dimen>
     <dimen name="movie_title_size">18sp</dimen>
     <dimen name="movie_release_date_size">16sp</dimen>
+    <dimen name="movie_detail_image_height">480dp</dimen>
+
 </resources>

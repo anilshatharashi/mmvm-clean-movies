@@ -30,7 +30,7 @@ class MoviesRepositoryImplTest {
         moviesRemoteDataSource = mockk()
         networkHandler = mockk()
         mapper =
-            DiscoverMoviesDomainMapper(mockk()) as Mapper<DiscoverMoviesResponse?, DiscoverMovies?>
+            DiscoverMoviesDomainMapper() as Mapper<DiscoverMoviesResponse?, DiscoverMovies?>
         repository = MoviesRepositoryImpl(networkHandler, moviesRemoteDataSource, mapper)
     }
 
