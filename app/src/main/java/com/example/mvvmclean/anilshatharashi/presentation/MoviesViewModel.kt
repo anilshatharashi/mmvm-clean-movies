@@ -17,7 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase,
-    private val mapper: Mapper<DiscoverMovies, UiMovieModel>
+    private val mapper: Mapper<DiscoverMovies, UiMovieModel>,
 ) : ViewModel() {
 
     val pageIndex = MutableLiveData(1)
@@ -35,7 +35,7 @@ class MoviesViewModel @Inject constructor(
     val moviesListState: LiveData<MoviesListState> = _moviesListState.asLiveData()
 
     init {
-        fetchMoviesList()
+        pageIndex.observeForever { fetchMoviesList() }
     }
 
     fun fetchMoviesList() {

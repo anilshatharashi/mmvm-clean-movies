@@ -58,7 +58,6 @@ class MoviesFragment : BaseFragment() {
 
                 override fun loadMoreItems() {
                     viewModel.pageIndex.value = pageIndex++
-                    viewModel.fetchMoviesList()
                 }
             })
             updateToolbar(getString(R.string.title_movies_fragment))
