@@ -28,9 +28,12 @@ android {
         debug {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            buildConfigField "String", "BASE_URL", "\"" + keys.BASE_URL_DEBUG + "\"" // this can be moved under the product flavors
-            buildConfigField "String", "BASE_URL_MOVIES_POSTERS", "\"" + keys.BASE_URL_MOVIES_POSTERS_DEBUG + "\"" // this can be moved under the product flavors
-            buildConfigField "String", "API_KEY", "\"" + keys.API_KEY_DEBUG + "\"" // this can be moved under the product flavors
+            buildConfigField "String", "BASE_URL", "\"" + keys.BASE_URL_DEBUG + "\""
+            // this can be moved under the product flavors
+            buildConfigField "String", "BASE_URL_MOVIES_POSTERS", "\"" + keys.BASE_URL_MOVIES_POSTERS_DEBUG + "\""
+            // this can be moved under the product flavors
+            buildConfigField "String", "API_KEY", "\"" + keys.API_KEY_DEBUG + "\""
+            // this can be moved under the product flavors
         }
         release {
             minifyEnabled false
@@ -50,6 +53,9 @@ android {
     }
     testOptions {
         unitTests.returnDefaultValues = true
+    }
+    buildFeatures {
+        viewBinding true
     }
 }
 

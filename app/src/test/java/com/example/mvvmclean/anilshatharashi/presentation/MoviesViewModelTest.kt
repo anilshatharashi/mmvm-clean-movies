@@ -19,9 +19,10 @@ import org.junit.Test
 
 class MoviesViewModelTest {
 
+    private val moviesListFlow = MutableSharedFlow<DiscoverMovies?>()
     private lateinit var moviesViewModel: MoviesViewModel
     private lateinit var getMoviesUseCase: GetMoviesUseCase
-    private lateinit var uiMapper: Mapper<DiscoverMovies, UiMovieModel>
+    private val uiMapper: Mapper<DiscoverMovies, UiMovieModel> = MoviesListUiMapper() as Mapper<DiscoverMovies, UiMovieModel>
 
     @get:Rule
     val taskExecutor = InstantTaskExecutorRule()
@@ -29,7 +30,8 @@ class MoviesViewModelTest {
     @Before
     fun setUp() {
         getMoviesUseCase = mockk()
-        uiMapper = MoviesListUiMapper() as Mapper<DiscoverMovies, UiMovieModel>
+
+        coEvery { getMoviesUseCase.execute(1) } returns moviesListFlow
         moviesViewModel = MoviesViewModel(getMoviesUseCase, uiMapper)
     }
 
@@ -42,24 +44,18 @@ class MoviesViewModelTest {
 
     @Test
     fun `page should be error page if null is returned`() {
-        val moviesFlow = MutableSharedFlow<DiscoverMovies?>()
-        coEvery { getMoviesUseCase.execute(1) } returns moviesFlow
-
         observeState {
-            moviesViewModel.fetchMoviesList(1)
-            runBlocking { moviesFlow.emit(null) }
+            moviesViewModel.fetchMoviesList()
+            runBlocking { moviesListFlow.emit(null) }
             verify { it.onChanged(MoviesListState.Failure(ErrorFetchingMoviesData)) }
         }
     }
 
     @Test
-    fun `getMoviesData should push moviess to the ui`() {
+    fun `getMoviesData should push movies to the ui`() {
         // GIVEN I select a movies id
-        val moviesFlow = MutableSharedFlow<DiscoverMovies?>()
-        coEvery { getMoviesUseCase.execute(1) } returns moviesFlow
-
         observeState {
-            moviesViewModel.fetchMoviesList(1)
+            moviesViewModel.fetchMoviesList()
 
             // WHEN I push a movies
             val movies = DiscoverMovies(
@@ -69,7 +65,7 @@ class MoviesViewModelTest {
                     Movie(adult = false, id = 52),
                 )
             )
-            runBlocking { moviesFlow.emit(movies) }
+            runBlocking { moviesListFlow.emit(movies) }
 
             // THEN it should be pushed to the ui
             verify(exactly = 1) { it.onChanged(MoviesListState.Success(uiMapper.mapFrom(movies))) }
@@ -77,18 +73,18 @@ class MoviesViewModelTest {
     }
 
     @Test
-    fun `getMoviesData should only push moviess for the last requested id`() {
+    fun `getMoviesData should only push movies for the last requested id`() {
         // GIVEN there are two movies ids
         val firstPageFlow = MutableSharedFlow<DiscoverMovies?>()
         val secondPageFlow = MutableSharedFlow<DiscoverMovies?>()
 
         coEvery { getMoviesUseCase.execute(1) } returns firstPageFlow
-        coEvery { getMoviesUseCase.execute(2) } returns secondPageFlow
+        coEvery { getMoviesUseCase.execute(1) } returns secondPageFlow
 
         observeState {
             // WHEN I subscribe first to one, then to the second
-            moviesViewModel.fetchMoviesList(1)
-            moviesViewModel.fetchMoviesList(2)
+            moviesViewModel.fetchMoviesList()
+            moviesViewModel.fetchMoviesList()
 
             // AND there is a movies for both ids
             val list1 = DiscoverMovies(
@@ -122,11 +118,11 @@ class MoviesViewModelTest {
 
     private fun observeState(block: (Observer<MoviesListState>) -> Unit) {
         val observer = mockk<Observer<MoviesListState>>(relaxUnitFun = true)
-        moviesViewModel.moviesList.observeForever(observer)
+        moviesViewModel.moviesListState.observeForever(observer)
         try {
             block(observer)
         } finally {
-            moviesViewModel.moviesList.removeObserver(observer)
+            moviesViewModel.moviesListState.removeObserver(observer)
         }
     }
 }

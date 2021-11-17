@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvmclean.anilshatharashi.presentation.MoviesViewModel
 import com.example.mvvmclean.anilshatharashi.presentation.ui.MovieDetailFragment
+import com.example.mvvmclean.anilshatharashi.presentation.ui.MovieDetailFragment.Companion.FRAGMENT_TAG
 import com.example.mvvmclean.anilshatharashi.presentation.ui.MoviesFragment
 import com.example.mvvmclean.anilshatharashi.presentation.ui.addFragment
 import com.example.mvvmclean.anilshatharashi.presentation.ui.replaceFragment
@@ -24,11 +25,8 @@ class MoviesActivity : AppCompatActivity() {
             addFragment(MoviesFragment.newInstance(), null)
         }
         moviesViewModel.selectedMovieLiveData.observe(this, {
-            if (supportFragmentManager.findFragmentByTag(MovieDetailFragment.FRAGMENT_TAG) == null) {
-                replaceFragment(
-                    MovieDetailFragment.newInstance(it),
-                    MovieDetailFragment.FRAGMENT_TAG
-                )
+            if (supportFragmentManager.findFragmentByTag(FRAGMENT_TAG) == null) {
+                replaceFragment(MovieDetailFragment.newInstance(it), FRAGMENT_TAG)
             }
         })
     }
