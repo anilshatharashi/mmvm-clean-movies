@@ -67,8 +67,6 @@ class MovieDetailFragment : BaseFragment() {
                     putParcelable(SELECTED_MOVIE_KEY, movie)
                 }
             }
-
-        private const val backdropSize: String = "/w1280/"
     }
 
     override fun onContentError() {

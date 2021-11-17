@@ -75,10 +75,10 @@ class MoviesListUiMapper @Inject constructor() : Mapper<DiscoverMovies?, UiMovie
         var coverPhotoSize = "/w780/"
         when (smallestWidth) {
             in 320..479 -> {
-                thumbnailSize = "/w185/"; coverPhotoSize = "/w342/"
+                thumbnailSize = "/w185/"; coverPhotoSize = "/w500/"
             }
             in 480..599 -> {
-                thumbnailSize = "/w300/"; coverPhotoSize = "/w500/"
+                thumbnailSize = "/w300/"; coverPhotoSize = "/w780/"
             }
             in 600..719 -> {
                 thumbnailSize = "/w500/"; coverPhotoSize = "/w780/"
