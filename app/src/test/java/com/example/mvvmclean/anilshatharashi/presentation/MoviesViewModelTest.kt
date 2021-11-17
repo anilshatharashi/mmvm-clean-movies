@@ -22,7 +22,7 @@ class MoviesViewModelTest {
     private val moviesListFlow = MutableSharedFlow<DiscoverMovies?>()
     private lateinit var moviesViewModel: MoviesViewModel
     private lateinit var getMoviesUseCase: GetMoviesUseCase
-    private val uiMapper: Mapper<DiscoverMovies, UiMovieModel> = MoviesListUiMapper() as Mapper<DiscoverMovies, UiMovieModel>
+    private val uiMapper = MoviesListUiMapper()
 
     @get:Rule
     val taskExecutor = InstantTaskExecutorRule()

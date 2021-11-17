@@ -13,14 +13,14 @@ data class UiMovieModel(
 @Parcelize
 data class UiMovie(
     var adult: Boolean = false,
-    var backdropPath: String? = null,
+    var backdropPath: String, // used as Backdrop in Details screen
     var genreIDS: List<Int>? = emptyList(),
     var id: Long = 0,
     var language: Language = Language.EN,
     var originalTitle: String? = "",
     var overview: String? = "",
     var popularity: Double = 0.0,
-    var posterPath: String? = null,
+    var posterPath: String? = null, // used as logo in list screen
     var releaseDate: String? = null,
     var title: String? = "",
     var video: Boolean = false,

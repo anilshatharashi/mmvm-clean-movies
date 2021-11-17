@@ -17,11 +17,11 @@ import javax.inject.Inject
 @HiltViewModel
 class MoviesViewModel @Inject constructor(
     private val getMoviesUseCase: GetMoviesUseCase,
-    private val mapper: Mapper<DiscoverMovies, UiMovieModel>,
+    private val mapper: MoviesListUiMapper,
 ) : ViewModel() {
 
     val pageIndex = MutableLiveData(1)
-
+    var smallestWidth: Int = 0
     private val _isLastPage = MutableLiveData(false)
     val isLastPage: LiveData<Boolean> = _isLastPage
 
@@ -55,6 +55,7 @@ class MoviesViewModel @Inject constructor(
     }
 
     private fun handleSuccess(discoverMovies: DiscoverMovies): Success {
+        mapper.smallestWidth = smallestWidth
         val uiModel = mapper.mapFrom(discoverMovies)
         _isLastPage.postValue(uiModel.page == uiModel.totalPages)
         _isLoading.postValue(false)

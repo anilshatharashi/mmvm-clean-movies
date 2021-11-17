@@ -5,11 +5,8 @@ import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.mvvmclean.anilshatharashi.presentation.MoviesViewModel
-import com.example.mvvmclean.anilshatharashi.presentation.ui.MovieDetailFragment
+import com.example.mvvmclean.anilshatharashi.presentation.ui.*
 import com.example.mvvmclean.anilshatharashi.presentation.ui.MovieDetailFragment.Companion.FRAGMENT_TAG
-import com.example.mvvmclean.anilshatharashi.presentation.ui.MoviesFragment
-import com.example.mvvmclean.anilshatharashi.presentation.ui.addFragment
-import com.example.mvvmclean.anilshatharashi.presentation.ui.replaceFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +19,7 @@ class MoviesActivity : AppCompatActivity() {
         setContentView(R.layout.acivity_movies)
 
         if (savedInstanceState == null) {
-            addFragment(MoviesFragment.newInstance(), null)
+            addFragment(MoviesFragment.newInstance(getSmallestWidthOfTheDevice()), null)
         }
         moviesViewModel.selectedMovieLiveData.observe(this, {
             if (supportFragmentManager.findFragmentByTag(FRAGMENT_TAG) == null) {

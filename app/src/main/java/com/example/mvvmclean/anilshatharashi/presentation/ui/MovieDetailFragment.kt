@@ -38,7 +38,7 @@ class MovieDetailFragment : BaseFragment() {
     private fun renderDataOnUi(model: UiMovie) {
         updateToolbar(model.title)
         binding.run {
-            detailImageView.loadFromUrl(backdropSize + model.backdropPath)
+            detailImageView.loadFromUrl(model.backdropPath)
             detailTitleView.text = model.title
             detailReleasedOnView.text = getString(R.string.detail_release_date, model.releaseDate)
 

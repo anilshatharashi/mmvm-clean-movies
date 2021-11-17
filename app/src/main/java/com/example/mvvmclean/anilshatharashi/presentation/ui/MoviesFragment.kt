@@ -1,9 +1,11 @@
 package com.example.mvvmclean.anilshatharashi.presentation.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.fragment.app.activityViewModels
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -29,6 +31,13 @@ class MoviesFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private var pageIndex: Int = PAGE_START
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        viewModel.smallestWidth = arguments?.getInt(SMALLEST_WIDTH) ?: 0
+        Log.i("**", "Width = ${viewModel.smallestWidth}")
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -139,6 +148,10 @@ class MoviesFragment : BaseFragment() {
 
     companion object {
         private const val GRID_LAYOUT_SPAN_COUNT = 2
-        fun newInstance() = MoviesFragment()
+        private const val SMALLEST_WIDTH = "width"
+
+        fun newInstance(width: Int) = MoviesFragment().apply {
+            arguments = bundleOf(SMALLEST_WIDTH to width)
+        }
     }
 }
