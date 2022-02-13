@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
     ext.lifecycleVersion = '2.3.1'
-    ext.hiltVersion = '2.35'
+    ext.hiltVersion = '2.40.5'
     ext.ktxVersion = '1.5.0'
     ext.hiltAndroidxVersion = '1.0.0'
     ext.retrofitVersion = '2.9.0'
@@ -16,8 +16,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath "com.android.tools.build:gradle:7.0.0-beta02"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.4.32"
+        classpath 'com.android.tools.build:gradle:7.2.0-beta02'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.6.10"
         classpath "com.google.dagger:hilt-android-gradle-plugin:$hiltVersion"
     }
 }
